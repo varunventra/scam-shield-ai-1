@@ -1,6 +1,6 @@
 # State
 
-Last synced: not yet run — run `/sync` once, in Claude Code, in this repo, to stamp this.
+Last synced: 2026-08-19 (post-push update by repo-ops)
 
 ## Snapshot
 
@@ -17,7 +17,7 @@ Last synced: not yet run — run `/sync` once, in Claude Code, in this repo, to 
 
 ## Accounts / infra status
 
-- [ ] GitHub repo `varunventra/scam-shield-ai-1` — pushed and confirmed live
+- [x] GitHub repo `varunventra/scam-shield-ai-1` — pushed and confirmed live (2026-08-19, commit e124531, branch master)
 - [ ] MongoDB Atlas cluster created, connection string obtained
 - [ ] OpenAI API key obtained (GPT-4o access)
 - [ ] Featherless.ai API key obtained (optional — falls back to OpenAI if unset)
@@ -51,6 +51,11 @@ Nothing active yet — run `/task <description>` in Claude Code to start one.
 
 ## Next step (exact action to resume on)
 
-Run `/setup-repo` in Claude Code, inside this project folder, on your machine — it
-will push this to GitHub without you typing git commands. After that, the next
-blocker is entirely manual: MongoDB Atlas + OpenAI key + Render + Vercel accounts.
+Repo is live on GitHub. The next steps are all manual (browser required):
+1. Create MongoDB Atlas cluster, get the connection string (`MONGODB_URI`).
+2. Get an OpenAI API key with GPT-4o access (`OPENAI_API_KEY`).
+3. Optionally get a Featherless.ai API key (`FEATHERLESS_API_KEY`).
+4. Deploy backend on Render — set all env vars listed in the Accounts section above.
+5. Deploy frontend on Vercel — update `frontend/vercel.json` with the real Render URL,
+   set `VITE_API_KEY` to match the backend `API_KEY`.
+6. Run end-to-end smoke test.
