@@ -24,7 +24,7 @@ export default function Sidebar({ page, onPageChange }) {
       <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '0 8px', marginBottom: 28 }}>
         <div style={{
           width: 32, height: 32, borderRadius: 8, flexShrink: 0,
-          background: 'linear-gradient(135deg, #7C3AED 0%, #7C3AED 100%)',
+          background: 'linear-gradient(135deg, #059669 0%, #059669 100%)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           boxShadow: '0 2px 8px rgba(37,99,235,0.35)',
         }}>
@@ -37,12 +37,12 @@ export default function Sidebar({ page, onPageChange }) {
       </div>
 
       {/* Nav label */}
-      <p style={{ fontSize: 9.5, fontWeight: 700, color: '#B0A99E', letterSpacing: '0.1em', padding: '0 4px', marginBottom: 6 }}>
+      <p style={{ fontSize: 9.5, fontWeight: 700, color: '#B0A99E', letterSpacing: '0.1em', padding: '0 10px', marginBottom: 6 }}>
         MENU
       </p>
 
-      {/* Nav — each item is its own floating glossy card */}
-      <nav style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+      {/* Nav */}
+      <nav style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
         {NAV.map(({ id, label, icon: Icon }) => {
           const active = page === id
           return (
@@ -52,50 +52,24 @@ export default function Sidebar({ page, onPageChange }) {
               aria-current={active ? 'page' : undefined}
               style={{
                 display: 'flex', alignItems: 'center', gap: 9,
-                padding: '9px 12px',
-                borderRadius: 10,
+                padding: '8px 10px',
+                borderRadius: 8,
+                border: 'none',
                 cursor: 'pointer',
                 fontSize: 13.5,
                 fontWeight: active ? 600 : 500,
+                color: active ? '#059669' : '#6B7280',
+                background: active ? 'rgba(5,150,105,0.08)' : 'transparent',
+                transition: 'all 0.15s',
                 textAlign: 'left',
                 width: '100%',
-                transition: 'all 0.15s',
-                ...(active ? {
-                  color: '#7C3AED',
-                  background: 'linear-gradient(135deg, #F5F0FF 0%, #EDE8FF 100%)',
-                  border: '1px solid rgba(124,58,237,0.20)',
-                  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.9), 0 2px 8px rgba(124,58,237,0.12)',
-                } : {
-                  color: '#6B7280',
-                  background: 'linear-gradient(135deg, #FAFAFA 0%, #F5F5F5 100%)',
-                  border: '1px solid rgba(0,0,0,0.07)',
-                  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.85), 0 1px 3px rgba(0,0,0,0.05)',
-                }),
               }}
-              onMouseEnter={e => {
-                if (!active) {
-                  e.currentTarget.style.color = '#0D0D0D'
-                  e.currentTarget.style.borderColor = 'rgba(0,0,0,0.13)'
-                  e.currentTarget.style.boxShadow = 'inset 0 1px 0 rgba(255,255,255,0.9), 0 2px 8px rgba(0,0,0,0.08)'
-                }
-              }}
-              onMouseLeave={e => {
-                if (!active) {
-                  e.currentTarget.style.color = '#6B7280'
-                  e.currentTarget.style.borderColor = 'rgba(0,0,0,0.07)'
-                  e.currentTarget.style.boxShadow = 'inset 0 1px 0 rgba(255,255,255,0.85), 0 1px 3px rgba(0,0,0,0.05)'
-                }
-              }}
+              onMouseEnter={e => { if (!active) { e.currentTarget.style.background = 'rgba(0,0,0,0.04)'; e.currentTarget.style.color = '#0D0D0D' } }}
+              onMouseLeave={e => { if (!active) { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#6B7280' } }}
             >
               <Icon size={15} />
               <span style={{ flex: 1 }}>{label}</span>
-              {active && (
-                <span style={{
-                  width: 6, height: 6, borderRadius: '50%',
-                  background: '#7C3AED',
-                  boxShadow: '0 0 6px rgba(124,58,237,0.5)',
-                }} />
-              )}
+              {active && <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#059669' }} />}
             </button>
           )
         })}

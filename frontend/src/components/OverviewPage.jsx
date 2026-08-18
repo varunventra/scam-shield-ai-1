@@ -16,7 +16,7 @@ const INTEL_ROWS = [
   { key: 'emailAddresses',     label: 'Emails' },
 ]
 
-const ACCENT = '#7C3AED'
+const ACCENT = '#059669'
 
 function palette() {
   return {
