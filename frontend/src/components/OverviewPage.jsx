@@ -16,7 +16,7 @@ const INTEL_ROWS = [
   { key: 'emailAddresses',     label: 'Emails' },
 ]
 
-const ACCENT = '#3b82f6'
+const ACCENT = '#7C3AED'
 
 function palette() {
   return {
@@ -258,7 +258,7 @@ export default function OverviewPage() {
         {/* ── Header owns the page title AND the demo CTA — no banner box ── */}
         <header className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6">
           <div>
-            <h1 style={{ fontSize: 22, fontWeight: 700, letterSpacing: '-0.025em', color: C.text }}>Overview</h1>
+            <h1 style={{ fontSize: 28, fontWeight: 800, letterSpacing: '-0.03em', color: C.text, lineHeight: 1.1 }}>Overview</h1>
             <p className="mt-1.5" style={{ fontSize: 12.5, color: C.muted, maxWidth: '52ch', lineHeight: 1.55 }}>
               Evidence from <b style={{ color: C.text, fontWeight: 600 }}>
               {loading ? '…' : `${stats.total} autonomous sessions`}</b> — detection, persona

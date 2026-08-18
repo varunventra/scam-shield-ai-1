@@ -16,7 +16,7 @@ body::before {
   position: fixed;
   top: 0; left: 0; right: 0;
   height: 2px;
-  background: linear-gradient(90deg, #2563EB 0%, #7C3AED 100%);
+  background: linear-gradient(90deg, #7C3AED 0%, #C026D3 100%);
   z-index: 9999;
 }
 
