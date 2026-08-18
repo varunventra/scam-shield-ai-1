@@ -24,7 +24,7 @@ export default function Sidebar({ page, onPageChange }) {
       <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '0 8px', marginBottom: 28 }}>
         <div style={{
           width: 32, height: 32, borderRadius: 8, flexShrink: 0,
-          background: 'linear-gradient(135deg, #C2410C 0%, #C2410C 100%)',
+          background: 'linear-gradient(135deg, #A16207 0%, #A16207 100%)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           boxShadow: '0 2px 8px rgba(37,99,235,0.35)',
         }}>
@@ -58,7 +58,7 @@ export default function Sidebar({ page, onPageChange }) {
                 cursor: 'pointer',
                 fontSize: 13.5,
                 fontWeight: active ? 600 : 500,
-                color: active ? '#C2410C' : '#6B7280',
+                color: active ? '#A16207' : '#6B7280',
                 background: active ? 'rgba(5,150,105,0.08)' : 'transparent',
                 transition: 'all 0.15s',
                 textAlign: 'left',
@@ -69,7 +69,7 @@ export default function Sidebar({ page, onPageChange }) {
             >
               <Icon size={15} />
               <span style={{ flex: 1 }}>{label}</span>
-              {active && <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#C2410C' }} />}
+              {active && <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#A16207' }} />}
             </button>
           )
         })}
