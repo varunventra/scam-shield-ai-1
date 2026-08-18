@@ -25,7 +25,7 @@ export default function App() {
 
   return (
     <AdminGate>
-      <div className="flex h-screen overflow-hidden" style={{ background: '#EDE8E0' }}>
+      <div className="flex h-screen overflow-hidden" style={{ background: 'transparent' }}>
         <Sidebar page={page} onPageChange={setPage} />
         <div className="flex-1 overflow-hidden relative">
           <AnimatePresence mode="wait">

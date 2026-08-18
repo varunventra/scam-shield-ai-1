@@ -29,7 +29,10 @@ body::before {
 
   body {
     font-family: 'Samsung Sans', system-ui, sans-serif;
-    background-color: #EDE8E0;
+    background:
+      radial-gradient(ellipse at 70% 0%, rgba(255,248,240,0.75) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 100%, rgba(220,210,196,0.5) 0%, transparent 55%),
+      linear-gradient(160deg, #F0EAE0 0%, #E8E1D6 50%, #DDD5C8 100%);
     color: #1C1714;
     -webkit-font-smoothing: antialiased;
   }

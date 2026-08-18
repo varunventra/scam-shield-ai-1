@@ -248,7 +248,7 @@ export default function OverviewPage() {
   ]
 
   return (
-    <div className="h-full overflow-y-auto" style={{ background: C.bg }}>
+    <div className="h-full overflow-y-auto" style={{ background: 'transparent' }}>
       <div className="mx-auto px-5 sm:px-10" style={{ maxWidth: 1060, paddingTop: 32, paddingBottom: 48 }}>
 
         {/* ── Header owns the page title AND the demo CTA — no banner box ── */}
