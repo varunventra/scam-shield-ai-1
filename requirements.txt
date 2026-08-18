@@ -1,0 +1,55 @@
+# =============================================================================
+# Runtime dependencies — pinned.
+#
+# Versions are pinned to what the test suite actually passes against. Unbounded
+# ">=" ranges meant two installs weeks apart produced different dependency
+# trees, which matters here because the committed TF-IDF pickles are only
+# loadable by the scikit-learn minor they were saved with, and the DistilBERT
+# config.json is written in the transformers 5.x schema.
+#
+# Bump deliberately: change a pin, run the suite, commit both together.
+# =============================================================================
+
+# Core Framework
+fastapi==0.141.1
+slowapi==0.1.10
+uvicorn[standard]==0.52.0
+pydantic==2.13.4
+pydantic-settings==2.14.2
+
+# OpenAI
+openai==2.51.0
+
+# HTTP Client
+httpx==0.28.1
+
+# Environment Variables
+python-dotenv==1.2.2
+
+# MongoDB (async driver)
+motor==3.7.1
+pymongo==4.17.0
+
+# PDF Report Generation
+fpdf2==2.8.7
+
+# Language Detection
+langdetect==1.0.9
+
+# ML Scam Detection
+# The scikit-learn pin is load-bearing: ml/models/*.pkl were saved with 1.8 and
+# a different minor will fail or silently misbehave on unpickle.
+scikit-learn==1.8.0
+joblib==1.5.3
+numpy==2.4.6
+
+# spaCy NER. The model (en_core_web_sm) is installed by the deploy build
+# command, not pip — see render.yaml buildCommand.
+spacy==3.8.14
+
+# DistilBERT + training deps live in requirements-ml.txt and are intentionally
+# NOT installed on the serving deploy (torch is multi-GB and won't fit a 512MB
+# instance; the fine-tuned weights are gitignored anyway). ml_detector.py falls
+# back to the bundled TF-IDF model when transformers/torch are absent. Install
+# the ML tier only where you run/train DistilBERT:
+#     pip install -r requirements.txt -r requirements-ml.txt

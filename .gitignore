@@ -1,0 +1,121 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+!frontend/src/lib/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+venv311/
+env/
+ENV/
+.venv
+
+# ML models and checkpoints — DistilBERT weights too large for git,
+# but keep the small TF-IDF fallback models so a fresh clone detects scams
+ml/models/*
+!ml/models/scam_model.pkl
+!ml/models/vectorizer.pkl
+ml/checkpoints/
+
+# Large data files
+old_sessions.json
+data/scam_dataset_enhanced.csv
+data/sessions_training_only.csv
+forensics/
+
+# Frontend build output
+frontend/dist/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment variables
+.env
+.env.local
+
+# Logs
+*.log
+logs/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Docker
+.dockerignore
+
+.claude/
+
+# Internal dev/test scripts
+check_session_pdf.py
+test_pdf_storage.py
+demo_for_ppt.py
+main_tester.py
+FINAL.py
+
+# Internal documentation (not for public repo)
+PROJECT_FULL_CONTEXT.md
+JURY_PREPARATION.md
+DEMO_SCRIPT.md
+DETECTION_ROUTING_GUIDE.md
+ML_IMPLEMENTATION_OVERVIEW.md
+ML_OPTIMIZATION_SUMMARY.md
+PDF_GENERATION_FIX.md
+PDF_PERIODIC_UPDATE_SYSTEM.md
+PDF_STORAGE_IMPLEMENTATION.md
+PDF_STORAGE_QUICKSTART.md
+PRE_PUSH_VERIFICATION.md
+
+# Hackathon materials
+AI for Fraud Detection & User Safety document.txt
+India AI Impact Buildathon - Sample PPT.pptx
+*.pptx
+
+test_comprehensive_eval.py
+
+IMPLEMENTATION_SUMMARY.md
+
+# Design mockups (local working artifacts)
+mockups/
+
+# Previous hackathon materials / internal notes (keep local, not for public repo)
+yes.pdf
+HACKATHON_READINESS_REPORT.md
+TEST_IMPROVEMENTS_SUMMARY.md
+context.md
+uv.lock
+.gstack/
+DEMO_VIDEO_SCRIPT.md
+DESIGN.md

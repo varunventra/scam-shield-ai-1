@@ -1,0 +1,76 @@
+services:
+  - type: web
+    name: scambot-honeypot
+    env: python
+    region: oregon
+    plan: free
+    branch: main
+    buildCommand: pip install -r requirements.txt && python -m spacy download en_core_web_sm
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: FEATHERLESS_API_KEY
+        sync: false
+      # Without MONGODB_URI the app refuses to boot when DEBUG=false, because
+      # every session would be held in a process-local dict and lost on the
+      # next spin-down.
+      - key: MONGODB_URI
+        sync: false
+      - key: ADMIN_API_KEY
+        sync: false
+      # Evaluation mode: read-only admin endpoints (dashboard) open without a
+      # key. FLIP BACK TO false AFTER THE EVENT — leaves scammer PII exports
+      # world-readable while true.
+      - key: PUBLIC_DASHBOARD
+        value: true
+      # Explicit browser origin allowlist for the dashboard. Empty = same-origin
+      # only. Never set this to "*".
+      - key: ALLOWED_ORIGINS
+        sync: false
+      - key: DAILY_TOKEN_BUDGET
+        value: 2000000
+      - key: MAX_MESSAGE_CHARS
+        value: 4000
+      - key: MAX_REQUEST_BYTES
+        value: 262144
+      - key: LLM_TIMEOUT_SECONDS
+        value: 20
+      - key: DATA_RETENTION_DAYS
+        value: 180
+      - key: FEATHERLESS_MODEL
+        value: Qwen/Qwen2.5-7B-Instruct
+      - key: OPENAI_MODEL
+        value: gpt-4o
+      - key: OPENAI_TEMPERATURE
+        value: 0.7
+      - key: MAX_TOKENS
+        value: 1000
+      - key: CALLBACK_URL
+        sync: false
+      - key: DEBUG
+        value: false
+      - key: LOG_LEVEL
+        value: INFO
+      - key: MAX_CONVERSATION_TURNS
+        value: 20
+      - key: SESSION_TIMEOUT
+        value: 3600
+      - key: SCAM_CONFIDENCE_THRESHOLD
+        value: 0.7
+      - key: AGENT_NAME
+        value: Rahul
+      - key: AGENT_AGE
+        value: 28
+      - key: AGENT_OCCUPATION
+        value: Software Engineer
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        fromService:
+          type: web
+          name: scambot-honeypot
+          property: port

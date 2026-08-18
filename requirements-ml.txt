@@ -1,0 +1,24 @@
+# =============================================================================
+# Heavy ML dependencies — NOT installed on the serving deploy.
+#
+# torch is a multi-GB wheel and a resident DistilBERT needs ~1GB, which does not
+# fit Render's 512MB free instance. The fine-tuned DistilBERT weights are also
+# gitignored (267MB), so a cloud deploy has no weights to load and would fall
+# back to TF-IDF regardless.
+#
+# app/services/ml_detector.py imports torch/transformers inside try/except, so
+# when these are absent the service runs the TF-IDF tier (ml/models/*.pkl,
+# bundled in the repo) with no code change.
+#
+# Install these only where you actually run/train DistilBERT (a GPU box, or a
+# paid instance with enough RAM):
+#     pip install -r requirements.txt -r requirements-ml.txt
+# =============================================================================
+
+# DistilBERT classifier (inference + fine-tuning)
+transformers==5.14.1
+torch==2.13.0
+
+# Training-only (used by the ml/ scripts, never to serve traffic)
+pandas==3.0.5
+datasets==5.0.1

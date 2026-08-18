@@ -1,0 +1,9 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [
+      "mockups/overview-redesign.html"
+    ],
+    "ignoreValues": []
+  }
+}

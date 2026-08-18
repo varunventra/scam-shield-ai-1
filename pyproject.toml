@@ -1,0 +1,49 @@
+[project]
+name = "scamshield-ai"
+version = "0.1.0"
+description = "Agentic honeypot that engages scammers and extracts actionable intelligence"
+readme = "README.md"
+requires-python = ">=3.11"
+# Runtime dependencies are declared in requirements.txt, which is what the
+# deploy installs. A second, divergent list here was a trap.
+dependencies = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# Third-party deprecation noise drowned the actual results; app warnings still
+# surface.
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::PendingDeprecationWarning",
+]
+markers = [
+    "remote: hits a live deployed backend; requires --remote and TEST_BASE_URL",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "S"]
+ignore = [
+    "E501",   # line length is handled by the formatter
+    "B008",   # FastAPI's Depends()/Query() in defaults is the framework idiom
+    "UP042",  # ScamType(str, Enum): switching to StrEnum changes str() output
+              # of members and the value is serialized into MongoDB documents
+]
+
+[tool.ruff.lint.per-file-ignores]
+# asserts and test credentials are fine; S110/E402 cover the deliberate
+# fixture patterns (optional monkeypatch targets, import-order-sensitive
+# direct-file module loading in test_forensic_reporter).
+"tests/*" = ["S101", "S105", "S106", "S110", "E402"]
+"ml/*" = ["S301"]                     # pickle load is inherent to the model format
+
+[tool.mypy]
+python_version = "3.11"
+warn_unused_ignores = true
+ignore_missing_imports = true
+# Start permissive; tighten module by module rather than blocking on a big-bang
+# annotation pass.
+check_untyped_defs = false
