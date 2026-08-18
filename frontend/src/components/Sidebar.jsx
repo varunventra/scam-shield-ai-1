@@ -1,6 +1,4 @@
-import { Shield, LayoutDashboard, Search, FileText, Moon, Sun, LogOut, ArrowUpRight } from 'lucide-react'
-import { useEffect, useState } from 'react'
-import { toggleDark, initDark } from '../hooks/darkMode'
+import { Shield, LayoutDashboard, Search, FileText, ArrowUpRight } from 'lucide-react'
 
 const NAV = [
   { id: 'overview', label: 'Overview', icon: LayoutDashboard },
@@ -8,40 +6,44 @@ const NAV = [
   { id: 'reports',  label: 'Reports',  icon: FileText },
 ]
 
-export default function Sidebar({ page, onPageChange, onExit }) {
-  const [dark, setDark] = useState(() => document.documentElement.classList.contains('dark'))
+const BG       = '#FDFCFA'
+const BORDER   = '#E2DBD3'
+const BODY     = '#1C1714'
+const MUTED    = '#7A6F67'
+const ACCENT   = '#3b82f6'
 
-  const handleToggleDark = () => {
-    const next = toggleDark()
-    setDark(next)
-  }
-
-  useEffect(() => {
-    initDark()
-    setDark(document.documentElement.classList.contains('dark'))
-  }, [])
-
-  const borderColor  = dark ? '#27272a' : '#e4e4e7'
-  const pageBg       = dark ? '#09090b' : '#ffffff'
-  const bodyText     = dark ? '#fafafa'  : '#111111'
-  const mutedText    = '#71717a'
-
+export default function Sidebar({ page, onPageChange }) {
   return (
     <div
-      className="w-56 flex flex-col py-6 px-4 flex-shrink-0 transition-colors"
-      style={{ background: pageBg, borderRight: `1px solid ${borderColor}` }}
+      className="w-56 flex flex-col py-6 px-4 flex-shrink-0"
+      style={{
+        background: `linear-gradient(180deg, #FFFFFF 0%, ${BG} 100%)`,
+        borderRight: `1px solid ${BORDER}`,
+        boxShadow: '2px 0 12px rgba(100,80,60,0.06)',
+      }}
     >
-
       {/* Logo */}
       <div className="flex items-center gap-2.5 px-2 mb-6">
-        <div className="w-8 h-8 flex items-center justify-center" style={{ border: `1px solid ${borderColor}`, borderRadius: 4 }}>
-          <Shield size={15} style={{ color: bodyText }} />
+        <div
+          className="w-8 h-8 flex items-center justify-center"
+          style={{
+            background: 'linear-gradient(135deg, #3b82f6 0%, #6366f1 100%)',
+            borderRadius: 6,
+            boxShadow: '0 2px 8px rgba(59,130,246,0.30)',
+          }}
+        >
+          <Shield size={15} color="#ffffff" />
         </div>
         <div>
-          <p style={{ fontWeight: 800, fontSize: 15, color: bodyText, lineHeight: 1.2 }}>ScamShield</p>
-          <p style={{ fontSize: 10, color: mutedText }}>Honeypot AI</p>
+          <p style={{ fontWeight: 700, fontSize: 15, color: BODY, lineHeight: 1.2 }}>ScamShield</p>
+          <p style={{ fontSize: 10, color: MUTED }}>Honeypot AI</p>
         </div>
       </div>
+
+      {/* Section label */}
+      <p style={{ fontSize: 9.5, fontWeight: 700, color: MUTED, letterSpacing: '0.08em', paddingLeft: 12, marginBottom: 4 }}>
+        CONSOLE
+      </p>
 
       {/* Page nav */}
       <nav className="space-y-0.5 mb-6">
@@ -52,12 +54,14 @@ export default function Sidebar({ page, onPageChange, onExit }) {
               key={id}
               onClick={() => onPageChange(id)}
               aria-current={isActive ? 'page' : undefined}
-              className="w-full flex items-center gap-2.5 px-3 py-2.5 text-sm font-medium transition-colors"
+              className="w-full flex items-center gap-2.5 px-3 py-2.5 text-sm font-medium transition-all"
               style={{
-                color: isActive ? '#3b82f6' : mutedText,
-                borderLeft: isActive ? '2px solid #3b82f6' : '2px solid transparent',
-                borderRadius: 0,
-                background: 'transparent',
+                color:        isActive ? ACCENT : MUTED,
+                borderLeft:   isActive ? `2px solid ${ACCENT}` : '2px solid transparent',
+                borderRadius: isActive ? '0 6px 6px 0' : 0,
+                background:   isActive
+                  ? 'linear-gradient(90deg, rgba(59,130,246,0.08) 0%, transparent 100%)'
+                  : 'transparent',
               }}
             >
               <Icon size={15} aria-hidden="true" />
@@ -67,65 +71,54 @@ export default function Sidebar({ page, onPageChange, onExit }) {
         })}
       </nav>
 
-      {/* Live demo — the way to actually test the honeypot */}
+      {/* Divider */}
+      <div style={{ height: 1, background: BORDER, marginBottom: 12 }} />
+
+      {/* Live demo link */}
       <a
         href="/demo.html"
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center gap-2.5 px-3 py-2.5 text-sm font-semibold w-full mt-4"
+        className="flex items-center gap-2.5 px-3 py-2.5 text-sm font-semibold w-full transition-all"
         style={{
-          color: bodyText,
-          border: `1px solid ${borderColor}`,
-          borderRadius: 4,
+          color:          BODY,
+          border:         `1px solid ${BORDER}`,
+          borderRadius:   8,
           textDecoration: 'none',
+          background:     'linear-gradient(135deg, #FFFFFF 0%, #F7F3EE 100%)',
+          boxShadow:      '0 1px 4px rgba(100,80,60,0.07), inset 0 1px 0 rgba(255,255,255,0.9)',
         }}
-        onMouseEnter={e => e.currentTarget.style.borderColor = '#3b82f6'}
-        onMouseLeave={e => e.currentTarget.style.borderColor = borderColor}
+        onMouseEnter={e => { e.currentTarget.style.borderColor = ACCENT; e.currentTarget.style.boxShadow = '0 2px 10px rgba(59,130,246,0.15), inset 0 1px 0 rgba(255,255,255,0.9)' }}
+        onMouseLeave={e => { e.currentTarget.style.borderColor = BORDER; e.currentTarget.style.boxShadow = '0 1px 4px rgba(100,80,60,0.07), inset 0 1px 0 rgba(255,255,255,0.9)' }}
       >
-        <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#22c55e' }} />
+        <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#22c55e', boxShadow: '0 0 6px #22c55e' }} />
         <span className="flex-1 text-left">Phone Demo</span>
-        <ArrowUpRight size={13} style={{ color: mutedText }} />
+        <ArrowUpRight size={13} style={{ color: MUTED }} />
       </a>
 
       <div className="flex-1" />
 
-      {/* Dark mode toggle */}
-      <button
-        onClick={handleToggleDark}
-        className="flex items-center gap-2 px-3 py-2.5 text-sm transition-colors w-full mb-1"
-        style={{ color: mutedText, borderRadius: 4, background: 'transparent' }}
-        onMouseEnter={e => e.currentTarget.style.color = bodyText}
-        onMouseLeave={e => e.currentTarget.style.color = mutedText}
+      {/* Footer identity */}
+      <div
+        className="mt-3 pt-3 flex items-center gap-2.5 px-1"
+        style={{ borderTop: `1px solid ${BORDER}` }}
       >
-        {dark ? <Sun size={14} /> : <Moon size={14} />}
-        {dark ? 'Light mode' : 'Dark mode'}
-      </button>
-
-      {/* Console identity + back to landing */}
-      <div className="mt-3 pt-3 flex items-center gap-2.5 px-1" style={{ borderTop: `1px solid ${borderColor}` }}>
         <div
           className="w-8 h-8 flex items-center justify-center text-xs font-mono font-bold flex-shrink-0"
-          style={{ border: `1px solid ${borderColor}`, borderRadius: 4, color: bodyText, background: pageBg }}
+          style={{
+            background:   'linear-gradient(135deg, #F7F3EE 0%, #EDE8E0 100%)',
+            border:       `1px solid ${BORDER}`,
+            borderRadius: 6,
+            color:        BODY,
+            boxShadow:    'inset 0 1px 0 rgba(255,255,255,0.8)',
+          }}
         >
           S
         </div>
         <div className="min-w-0 flex-1">
-          <p className="text-xs font-mono font-semibold truncate" style={{ color: bodyText }}>CONSOLE</p>
-          <p className="text-[10px] truncate" style={{ color: mutedText }}>ScamShield AI</p>
+          <p className="text-xs font-mono font-semibold truncate" style={{ color: BODY }}>CONSOLE</p>
+          <p className="text-[10px] truncate" style={{ color: MUTED }}>ScamShield AI</p>
         </div>
-        {onExit && (
-          <button
-            onClick={onExit}
-            title="Back to landing page"
-            aria-label="Back to landing page"
-            className="flex-shrink-0 p-1.5 transition-colors"
-            style={{ color: mutedText, borderRadius: 4 }}
-            onMouseEnter={e => e.currentTarget.style.color = bodyText}
-            onMouseLeave={e => e.currentTarget.style.color = mutedText}
-          >
-            <LogOut size={13} aria-hidden="true" />
-          </button>
-        )}
       </div>
     </div>
   )

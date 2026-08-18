@@ -4,7 +4,6 @@ import { ArrowUpRight, RefreshCw } from 'lucide-react'
 import {
   ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, LabelList,
 } from 'recharts'
-import { useDarkMode } from '../hooks/useDarkMode'
 import { fetchSessions, fetchStats } from '../lib/api'
 import { TYPE_LABELS, SCAM_COLORS } from '../lib/labels'
 
@@ -19,25 +18,16 @@ const INTEL_ROWS = [
 
 const ACCENT = '#3b82f6'
 
-function palette(dark) {
-  return dark ? {
-    bg:       '#0a0a0c',
-    surface:  '#101013',
-    surface2: '#16161a',
-    line:     '#1e1e23',
-    lineSoft: '#19191d',
-    text:     '#f4f4f5',
-    muted:    '#8b8b94',
-    faint:    '#55555e',
-  } : {
-    bg:       '#ffffff',
-    surface:  '#fafafa',
-    surface2: '#f0f0f2',
-    line:     '#e4e4e7',
-    lineSoft: '#ececef',
-    text:     '#111111',
-    muted:    '#71717a',
-    faint:    '#a1a1aa',
+function palette() {
+  return {
+    bg:       '#EDE8E0',
+    surface:  '#FFFFFF',
+    surface2: '#EDE8E0',
+    line:     '#E2DBD3',
+    lineSoft: '#EAE4DC',
+    text:     '#1C1714',
+    muted:    '#7A6F67',
+    faint:    '#A89D96',
   }
 }
 
@@ -101,8 +91,11 @@ function BarRow({ label, count, max, C, color = ACCENT, swatch = false }) {
 
 function Card({ title, meta, children, C, className = '' }) {
   return (
-    <div className={className} style={{ background: C.surface, border: `1px solid ${C.line}`, borderRadius: 6, padding: '20px 24px 22px' }}>
-      <div className="flex items-baseline justify-between">
+    <div
+      className={`glass-card ${className}`}
+      style={{ padding: '20px 24px 22px' }}
+    >
+      <div className="flex items-baseline justify-between" style={{ borderBottom: `1px solid rgba(200,185,168,0.25)`, paddingBottom: 10, marginBottom: 4 }}>
         <p className="text-[12.5px] font-semibold" style={{ color: C.text }}>{title}</p>
         {meta && <p className="text-[10.5px]" style={{ color: C.faint }}>{meta}</p>}
       </div>
@@ -125,8 +118,7 @@ function maxOnlyLabel(maxValue, color) {
 }
 
 export default function OverviewPage() {
-  const dark = useDarkMode()
-  const C = palette(dark)
+  const C = palette()
   const [sessions, setSessions] = useState([])
   const [serverStats, setServerStats] = useState(null)
   const [loading, setLoading]   = useState(true)
@@ -295,7 +287,7 @@ export default function OverviewPage() {
         )}
 
         {/* ── Lead stat strip, four figures, hairline dividers ── */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 mt-6" style={{ background: C.surface, border: `1px solid ${C.line}`, borderRadius: 6 }}>
+        <div className="glass-card grid grid-cols-2 sm:grid-cols-4 mt-6">
           {tiles.map((t, i) => (
             <div key={t.label} style={{ padding: '30px 26px', borderLeft: i > 0 ? `1px solid ${C.lineSoft}` : 'none' }}>
               <p className="font-mono font-bold" style={{ fontSize: 40, letterSpacing: '-0.02em', color: C.text, lineHeight: 1 }}>
@@ -307,7 +299,7 @@ export default function OverviewPage() {
         </div>
 
         {/* ── Scammer time-waste meter (server-aggregated) ── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 mt-4" style={{ background: C.surface, border: `1px solid ${C.line}`, borderRadius: 6 }}>
+        <div className="glass-card grid grid-cols-1 sm:grid-cols-2 mt-4">
           {[
             { label: 'Scammer time wasted', value: serverStats?.scammerTimeWastedHuman ?? '—', hint: 'total engagement across all sessions' },
             { label: 'Avg time per scammer', value: serverStats?.avgEngagementHuman ?? '—', hint: 'mean session duration' },
@@ -347,7 +339,7 @@ export default function OverviewPage() {
                 <CartesianGrid stroke={C.lineSoft} vertical={false} strokeDasharray="" />
                 <XAxis dataKey="name" tick={axisTick} axisLine={{ stroke: C.line }} tickLine={false} />
                 <YAxis allowDecimals={false} tick={false} axisLine={false} width={32} />
-                <Tooltip content={<CustomTooltip />} cursor={{ fill: dark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.03)' }} />
+                <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(0,0,0,0.03)' }} />
                 <Bar dataKey="count" name="Sessions" fill={ACCENT} radius={[2, 2, 0, 0]}>
                   <LabelList content={maxOnlyLabel(maxScore, C.text)} />
                 </Bar>
@@ -364,7 +356,7 @@ export default function OverviewPage() {
                 <CartesianGrid stroke={C.lineSoft} vertical={false} strokeDasharray="" />
                 <XAxis dataKey="day" tick={axisTick} axisLine={{ stroke: C.line }} tickLine={false} interval="preserveStartEnd" />
                 <YAxis allowDecimals={false} tick={false} axisLine={false} width={32} />
-                <Tooltip content={<CustomTooltip />} cursor={{ fill: dark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.03)' }} />
+                <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(0,0,0,0.03)' }} />
                 <Bar dataKey="count" name="Sessions" fill={ACCENT} radius={[2, 2, 0, 0]}>
                   <LabelList content={maxOnlyLabel(maxDay, C.text)} />
                 </Bar>
@@ -379,7 +371,7 @@ export default function OverviewPage() {
         </div>
 
         {/* ── Models: one quiet strip ── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 mt-4" style={{ background: C.surface, border: `1px solid ${C.line}`, borderRadius: 6 }}>
+        <div className="glass-card grid grid-cols-1 md:grid-cols-2 mt-4">
           <div style={{ padding: '18px 24px' }}>
             <p style={{ fontSize: 12.5, fontWeight: 700, color: C.text }}>
               DistilBERT, fine-tuned

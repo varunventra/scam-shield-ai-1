@@ -4,33 +4,24 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"IBM Plex Sans"', 'system-ui', 'sans-serif'],
+        sans: ['"Samsung Sans"', 'system-ui', 'sans-serif'],
         mono: ['"IBM Plex Mono"', 'ui-monospace', 'Consolas', 'monospace'],
       },
       colors: {
-        bg: '#EEF1F4',
-        card: '#FFFFFF',
-        navy: '#1A1A2E',
-        danger: '#E63946',
-        safe: '#2DC653',
-        warn: '#F4A261',
-        textPrimary: '#111111',
-        textMuted: '#8A8A8A',
-        border: '#EEEEEE',
-        // Dark mode palette
-        dark: {
-          bg:      '#0F1117',
-          surface: '#1A1D27',
-          card:    '#20243A',
-          border:  '#2A2D3E',
-          text:    '#E8EAF0',
-          muted:   '#6B7280',
-          accent:  '#3B82F6',
-        },
+        bg:          '#EDE8E0',
+        card:        '#FFFFFF',
+        navy:        '#1A1A2E',
+        danger:      '#E63946',
+        safe:        '#2DC653',
+        warn:        '#F4A261',
+        textPrimary: '#1C1714',
+        textMuted:   '#7A6F67',
+        border:      '#E2DBD3',
       },
       boxShadow: {
-        card: '0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04)',
-        'card-hover': '0 4px 12px rgba(0,0,0,0.08)',
+        card:       '0 2px 16px rgba(100,80,60,0.09), 0 1px 4px rgba(100,80,60,0.06)',
+        'card-hover':'0 6px 28px rgba(100,80,60,0.13), 0 2px 8px rgba(100,80,60,0.08)',
+        'card-glass':'0 4px 24px rgba(100,80,60,0.10), 0 1px 6px rgba(100,80,60,0.07), inset 0 1px 0 rgba(255,255,255,0.85)',
       },
       borderRadius: { '2xl': '16px', '3xl': '24px' },
       keyframes: {
