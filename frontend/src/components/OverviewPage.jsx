@@ -20,14 +20,14 @@ const ACCENT = '#3b82f6'
 
 function palette() {
   return {
-    bg:       '#EDE8E0',
+    bg:       'transparent',
     surface:  '#FFFFFF',
-    surface2: '#EDE8E0',
-    line:     '#E2DBD3',
-    lineSoft: '#EAE4DC',
-    text:     '#1C1714',
-    muted:    '#7A6F67',
-    faint:    '#A89D96',
+    surface2: '#F3F4F6',
+    line:     'rgba(0,0,0,0.07)',
+    lineSoft: 'rgba(0,0,0,0.04)',
+    text:     '#0D0D0D',
+    muted:    '#6B7280',
+    faint:    '#B0A99E',
   }
 }
 
@@ -93,13 +93,17 @@ function Card({ title, meta, children, C, className = '' }) {
   return (
     <div
       className={`glass-card ${className}`}
-      style={{ padding: '20px 24px 22px' }}
+      style={{ padding: '20px 22px 22px' }}
     >
-      <div className="flex items-baseline justify-between" style={{ borderBottom: `1px solid rgba(200,185,168,0.25)`, paddingBottom: 10, marginBottom: 4 }}>
-        <p className="text-[12.5px] font-semibold" style={{ color: C.text }}>{title}</p>
-        {meta && <p className="text-[10.5px]" style={{ color: C.faint }}>{meta}</p>}
+      <div style={{
+        display: 'flex', alignItems: 'baseline', justifyContent: 'space-between',
+        marginBottom: 14, paddingBottom: 12,
+        borderBottom: '1px solid rgba(0,0,0,0.05)',
+      }}>
+        <p style={{ fontSize: 12.5, fontWeight: 700, color: C.text, letterSpacing: '-0.01em' }}>{title}</p>
+        {meta && <p style={{ fontSize: 10, color: C.faint }}>{meta}</p>}
       </div>
-      <div className="mt-1">{children}</div>
+      {children}
     </div>
   )
 }
@@ -254,7 +258,7 @@ export default function OverviewPage() {
         {/* ── Header owns the page title AND the demo CTA — no banner box ── */}
         <header className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6">
           <div>
-            <h1 style={{ fontSize: 21, fontWeight: 700, letterSpacing: '-0.02em', color: C.text }}>Overview</h1>
+            <h1 style={{ fontSize: 22, fontWeight: 700, letterSpacing: '-0.025em', color: C.text }}>Overview</h1>
             <p className="mt-1.5" style={{ fontSize: 12.5, color: C.muted, maxWidth: '52ch', lineHeight: 1.55 }}>
               Evidence from <b style={{ color: C.text, fontWeight: 600 }}>
               {loading ? '…' : `${stats.total} autonomous sessions`}</b> — detection, persona

@@ -2,70 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Samsung Sans Medium */
 @font-face {
   font-family: 'Samsung Sans';
   src: url('/fonts/SamsungSans-Medium.ttf') format('truetype');
-  font-weight: 400 700;
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 
-/* Top accent bar — warm gold-to-blue gradient */
+/* Thin top accent stripe */
 body::before {
   content: '';
-  display: block;
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #C8956C 0%, #3B82F6 100%);
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #2563EB 0%, #7C3AED 100%);
   z-index: 9999;
 }
 
 @layer base {
-  html, body, #root { height: 100%; padding-top: 3px; }
+  html, body, #root { height: 100%; padding-top: 2px; }
 
   body {
     font-family: 'Samsung Sans', system-ui, sans-serif;
     background:
-      radial-gradient(ellipse at 70% 0%, rgba(255,248,240,0.75) 0%, transparent 60%),
-      radial-gradient(ellipse at 20% 100%, rgba(220,210,196,0.5) 0%, transparent 55%),
-      linear-gradient(160deg, #F0EAE0 0%, #E8E1D6 50%, #DDD5C8 100%);
-    color: #1C1714;
+      radial-gradient(ellipse 90% 40% at 50% -5%, rgba(37,99,235,0.045) 0%, transparent 100%),
+      #EFECE6;
+    color: #0D0D0D;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   * { box-sizing: border-box; }
 
   :focus-visible {
-    outline: 2px solid #3b82f6;
+    outline: 2px solid #2563EB;
     outline-offset: 2px;
-    border-radius: 2px;
+    border-radius: 3px;
   }
   [data-no-focus-ring]:focus-visible { outline: none; }
 
   .chat-scroll::-webkit-scrollbar { display: none; }
-
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: rgba(100,80,60,0.15); border-radius: 2px; }
-  ::-webkit-scrollbar-thumb:hover { background: rgba(100,80,60,0.25); }
+  ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.20); }
 }
 
-/* ── Glossy floating card ─────────────────────────────────────────── */
+/* ── Floating glass card ──────────────────────────────────────────── */
 .glass-card {
-  background: linear-gradient(160deg, #FFFFFF 0%, #FAF7F3 100%);
-  box-shadow:
-    0 2px 16px rgba(100,80,60,0.09),
-    0 1px 4px  rgba(100,80,60,0.06),
-    inset 0 1px 0 rgba(255,255,255,0.90);
-  border: 1px solid rgba(200,185,168,0.35);
+  background: #FFFFFF;
+  border: 1px solid rgba(0,0,0,0.07);
   border-radius: 12px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.95),
+    0 1px 3px rgba(0,0,0,0.04),
+    0 4px 16px rgba(0,0,0,0.06);
 }
 
-/* ── Respect reduced-motion ───────────────────────────────────────── */
+/* ── Reduced motion ───────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
