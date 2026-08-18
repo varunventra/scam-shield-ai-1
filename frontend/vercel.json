@@ -1,5 +1,5 @@
 {
   "rewrites": [
-    { "source": "/api/:path*", "destination": "https://REPLACE-WITH-YOUR-RENDER-BACKEND-URL.onrender.com/api/:path*" }
+    { "source": "/api/:path*", "destination": "https://scam-shield-ai-1.onrender.com/api/:path*" }
   ]
 }
