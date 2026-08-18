@@ -119,3 +119,9 @@ uv.lock
 .gstack/
 DEMO_VIDEO_SCRIPT.md
 DESIGN.md
+
+# Claude Code session files
+CLAUDE.md
+state.md
+storyboard.md
+memory/
