@@ -69,7 +69,6 @@ export async function sendMessage(sessionId, message, conversationHistory = []) 
     })),
     metadata: {
       channel: 'SMS',
-      language: 'English',
       locale: 'IN',
     },
   })
