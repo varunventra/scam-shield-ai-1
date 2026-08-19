@@ -83,9 +83,11 @@ def issue_admin_session(response: Response) -> None:
         value=mint_admin_session(),
         max_age=ADMIN_SESSION_TTL,
         httponly=True,
-        samesite="strict",
-        # Secure is required in production; disabled under DEBUG so the cookie
-        # works over plain http on localhost.
+        # Must be "none" for cross-site use (Vercel frontend → Render backend).
+        # "strict" silently blocks the cookie on cross-origin requests, causing
+        # instant "session expired" errors. "none" requires Secure=True, which
+        # is already enforced below when not in debug mode.
+        samesite="none",
         secure=not settings.debug,
         path="/",
     )
